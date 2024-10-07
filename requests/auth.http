@@ -1,4 +1,4 @@
-@api = eventosback.vercel.app/api/auth
+@api = https://eventosback.vercel.app/api/auth
 
 ### post register
 POST {{api}}/register
