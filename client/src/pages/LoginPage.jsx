@@ -21,7 +21,7 @@ export function LoginPage() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/tasks");
+      navigate("/add-task");
     }
   }, [isAuthenticated]);
 
@@ -42,7 +42,9 @@ export function LoginPage() {
             placeholder="Correo electrónico"
             {...register("email", { required: true })}
           />
-          <p>{errors.email?.message}</p>
+          {errors.email?.message && (
+            <p className="text-sm text-red-500">{errors.email?.message}</p>
+          )}
 
           <Label htmlFor="password">Contraseña:</Label>
           <Input
@@ -51,7 +53,10 @@ export function LoginPage() {
             placeholder="Escribe tu contraseña"
             {...register("password", { required: true, minLength: 6 })}
           />
-          <p>{errors.password?.message}</p>
+          {errors.password?.message && (
+            <p className="text-sm text-red-500">{errors.password?.message}</p>
+          )}
+
 
           <Button>Ingresar</Button>
         </form>

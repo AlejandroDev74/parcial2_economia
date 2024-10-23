@@ -22,7 +22,7 @@ function Register() {
   };
 
   useEffect(() => {
-    if (isAuthenticated) navigate("/add-task");
+    if (isAuthenticated) navigate("/tasks");
   }, [isAuthenticated]);
 
   return (
@@ -31,7 +31,7 @@ function Register() {
         {registerErrors.map((error, i) => (
           <Message message={error} key={i} />
         ))}
-        <h1 className="text-3xl font-bold">Registro de nuevo usuario</h1>
+        <h1 className="text-3xl font-bold">Registro de nuevo usuario administrador</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Label htmlFor="username">Nombre:</Label>
           <Input
@@ -50,6 +50,7 @@ function Register() {
             type="date"
             name="fechanac"
             {...register("fechanac")}
+            autoFocus
           />
           {errors.fechanac?.message && (
             <p className="text-sm text-red-500">{errors.fechanac?.message}</p>
@@ -60,6 +61,7 @@ function Register() {
             type="number"
             name="identificacion"
             {...register("identificacion")}
+            autoFocus
           />
           {errors.identificacion?.message && (
             <p className="text-sm text-red-500">{errors.identificacion?.message}</p>
@@ -80,6 +82,7 @@ function Register() {
             type="number"
             name="celular"
             {...register("celular")}
+            autoFocus
           />
           {errors.celular?.message && (
             <p className="text-sm text-red-500">{errors.celular?.message}</p>

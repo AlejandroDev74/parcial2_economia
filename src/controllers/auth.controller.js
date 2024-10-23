@@ -6,14 +6,26 @@ import { createAccessToken } from "../libs/jwt.js";
 
 export const register = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, fechanac, identificacion, email, celular, password } = req.body;
+
+    //Verificaciones de las variables del formulario
+    const useridentificacionFound = await User.findOne({ identificacion });
+    if (useridentificacionFound)
+      return res.status(400).json({
+        message: ["Este número de identificación ya se encuentra en uso!"],
+      });
 
     const userFound = await User.findOne({ email });
-
     if (userFound)
       return res.status(400).json({
-        message: ["The email is already in use"],
+        message: ["Este correo ya se encuentra en uso!"],
       });
+
+    const usercelularFound = await User.findOne({ celular });
+    if (usercelularFound)
+      return res.status(400).json({
+        message: ["Este número de celular ya se encuentra en uso!"],
+       });
 
     // hashing the password
     const passwordHash = await bcrypt.hash(password, 10);
@@ -21,7 +33,10 @@ export const register = async (req, res) => {
     // creating the user
     const newUser = new User({
       username,
+      fechanac,
+      identificacion,
       email,
+      celular,
       password: passwordHash,
     });
 
@@ -42,7 +57,10 @@ export const register = async (req, res) => {
     res.json({
       id: userSaved._id,
       username: userSaved.username,
+      fechanac: userSaved.fechanac,
+      identificacion: userSaved.identificacion,
       email: userSaved.email,
+      celular: userSaved.celular,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -56,13 +74,13 @@ export const login = async (req, res) => {
 
     if (!userFound)
       return res.status(400).json({
-        message: ["The email does not exist"],
+        message: ["El usuario ingresado no existe!"],
       });
 
     const isMatch = await bcrypt.compare(password, userFound.password);
     if (!isMatch) {
       return res.status(400).json({
-        message: ["The password is incorrect"],
+        message: ["La contraseña es incorrecta!"],
       });
     }
 

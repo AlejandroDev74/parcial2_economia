@@ -7,9 +7,9 @@ export function Navbar() {
   console.log(isAuthenticated, user)
 
   return (
-    <nav className="bg-zinc-700 my-3 flex justify-between py-5 px-10 rounded-lg">
+    <nav className="bg-zinc-800 my-3 flex justify-between py-5 px-10 rounded-lg">
       <h1 className="text-2xl font-bold">
-        <Link to={isAuthenticated ? "/tasks" : "/"}>Administrador de eventos React</Link>
+        <Link to={isAuthenticated ? "/tasks" : "/"}>Plataforma de códigos Detodito</Link>
       </h1>
       <ul className="flex gap-x-2">
         {isAuthenticated ? (
@@ -18,10 +18,10 @@ export function Navbar() {
               Bienvenido <strong>{user.username}</strong>
             </li>
             <li>
-              <ButtonLink to="/add-task">Nuevo evento</ButtonLink>
+              <ButtonLink to="/add-task">Registrar código</ButtonLink>
             </li>
             <li>
-              <ButtonLink to="/tasks">Eventos</ButtonLink>
+              <ButtonLink to="/tasks">Códigos</ButtonLink>
             </li>
             <li>
               <Link to="/" onClick={() => logout()}>

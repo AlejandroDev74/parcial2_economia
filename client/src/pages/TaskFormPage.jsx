@@ -4,7 +4,6 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import { Button, Card, Input, Label } from "../components/ui";
 import { useTasks } from "../context/tasksContext";
-import { Textarea } from "../components/ui/Textarea";
 import { useForm } from "react-hook-form";
 dayjs.extend(utc);
 
@@ -45,7 +44,6 @@ export function TaskFormPage() {
       if (params.id) {
         const task = await getTask(params.id);
         setValue("title", task.title);
-        setValue("description", task.description);
         setValue(
           "date",
           task.date ? dayjs(task.date).utc().format("YYYY-MM-DD") : ""
@@ -57,33 +55,28 @@ export function TaskFormPage() {
   }, []);
 
   return (
+    <div className="h-[calc(100vh-110px)] flex items-center justify-center">
     <Card>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Label htmlFor="title">Título del evento</Label>
+        <Label htmlFor="title">A continuación digite el código:</Label><br />
         <Input
           type="text"
           name="title"
-          placeholder="Title"
+          placeholder="Código sin espacios"
           {...register("title")}
           autoFocus
         />
+
         {errors.title && (
-          <p className="text-red-500 text-xs italic">Ingrese un título</p>
+          <p className="text-sm text-red-500">Debe ingresar un código!</p>
         )}
 
-        <Label htmlFor="description">Descripción del evento</Label>
-        <Textarea
-          name="description"
-          id="description"
-          rows="3"
-          placeholder="Descripción"
-          {...register("description")}
-        ></Textarea>
-
-        <Label htmlFor="date">Fecha del evento</Label>
+        <Label htmlFor="date">Fecha:</Label>
         <Input type="date" name="date" {...register("date")} />
+
         <br /><br /><Button>Registrar</Button>
       </form>
     </Card>
+    </div>
   );
 }
