@@ -20,7 +20,7 @@ export function Navbar() {
             <li>
               <ButtonLink to="/add-task">Registrar código</ButtonLink>
             </li>
-                {(() => {
+              {(() => {
                   if (user.perfil == "Administrador") {
                     return (
                       <li>
