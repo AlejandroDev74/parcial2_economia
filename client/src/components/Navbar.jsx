@@ -20,9 +20,16 @@ export function Navbar() {
             <li>
               <ButtonLink to="/add-task">Registrar código</ButtonLink>
             </li>
-            <li>
-              <ButtonLink to="/tasks">Códigos</ButtonLink>
-            </li>
+                {(() => {
+                  if (user.perfil == "Administrador") {
+                    return (
+                      <li>
+                        <ButtonLink to="/tasks">Códigos</ButtonLink>
+                      </li>
+                    )
+
+                  }
+                })()}
             <li>
               <Link to="/" onClick={() => logout()}>
                 Salir

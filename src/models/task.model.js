@@ -2,13 +2,14 @@ import mongoose from "mongoose";
 
 const taskSchema = new mongoose.Schema(
   {
-    title: {
+    codigo: {
       type: String,
       required: true,
+      unique: true,
     },
-    date: {
-      type: Date,
-      default: Date.now,
+    estado: {
+      type: String,
+      required: true,
     },
     user: {
       type: mongoose.Types.ObjectId,

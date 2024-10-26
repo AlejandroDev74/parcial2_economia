@@ -106,6 +106,16 @@ function Register() {
           {errors.confirmPassword?.message && (
             <p className="text-sm text-red-500">{errors.confirmPassword?.message}</p>
           )}
+
+          <Input
+          type="text"
+          name="perfil"
+          {...register("perfil")}
+          autoFocus
+          value="Estandar"
+          hidden
+          />
+
           <Button>Registrarse</Button>
         </form>
         <p className="flex gap-x-2 justify-between">

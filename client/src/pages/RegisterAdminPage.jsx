@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { registerSchema } from "../schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-function Register() {
+function RegisterAdmin() {
   const { signup, errors: registerErrors, isAuthenticated } = useAuth();
   const {
     register,
@@ -109,6 +109,16 @@ function Register() {
           {errors.confirmPassword?.message && (
             <p className="text-sm text-red-500">{errors.confirmPassword?.message}</p>
           )}
+
+          <Input
+          type="text"
+          name="perfil"
+          {...register("perfil")}
+          autoFocus
+          value="Administrador"
+          hidden
+          />
+
           <Button>Registrarse</Button>
         </form>
         <p className="flex gap-x-2 justify-between">
@@ -119,4 +129,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default RegisterAdmin;

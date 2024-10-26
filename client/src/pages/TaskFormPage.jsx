@@ -23,19 +23,18 @@ export function TaskFormPage() {
       if (params.id) {
         updateTask(params.id, {
           ...data,
-          date: dayjs.utc(data.date).format(),
         });
       } else {
         createTask({
           ...data,
-          date: dayjs.utc(data.date).format(),
         });
       }
 
-      // navigate("/tasks");
+      alert('Cógido registrado correctamente!');
+      navigate("/tasks");
     } catch (error) {
       console.log(error);
-      // window.location.href = "/";
+      alert('El cógido ya se encuentra registrado!');
     }
   };
 
@@ -43,11 +42,8 @@ export function TaskFormPage() {
     const loadTask = async () => {
       if (params.id) {
         const task = await getTask(params.id);
-        setValue("title", task.title);
-        setValue(
-          "date",
-          task.date ? dayjs(task.date).utc().format("YYYY-MM-DD") : ""
-        );
+        setValue("codigo", task.codigo);
+        setValue("estado", task.estado);
         setValue("completed", task.completed);
       }
     };
@@ -57,22 +53,31 @@ export function TaskFormPage() {
   return (
     <div className="h-[calc(100vh-110px)] flex items-center justify-center">
     <Card>
+    <h1 className="text-3xl font-bold">Registro de nuevo código</h1><br />
+    <p>El rango numérico de los posibles códigos ganadores es desde 1 hasta 999, mucha suerte!</p><br />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Label htmlFor="title">A continuación digite el código:</Label><br />
+        <Label htmlFor="codigo">A continuación digite el código obtenido:</Label>
         <Input
-          type="text"
-          name="title"
+          type="number"
+          name="codigo"
+          id="codigo"
           placeholder="Código sin espacios"
-          {...register("title")}
+          {...register("codigo")}
           autoFocus
+          required
+          min="1"
+          max="999"
         />
 
-        {errors.title && (
-          <p className="text-sm text-red-500">Debe ingresar un código!</p>
-        )}
-
-        <Label htmlFor="date">Fecha:</Label>
-        <Input type="date" name="date" {...register("date")} />
+         <Input
+          type="text"
+          name="estado"
+          placeholder="Estado"
+          {...register("estado")}
+          autoFocus
+          value="Registrado"
+          hidden
+        />
 
         <br /><br /><Button>Registrar</Button>
       </form>
