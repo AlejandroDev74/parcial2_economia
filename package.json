@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A MERN CRUD with Authentication",
   "main": "index.js",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon src/index.js --ignore client",
     "start": "cross-env NODE_ENV=production node src/index.js"
