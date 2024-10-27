@@ -7,7 +7,7 @@ import authRoutes from "./routes/auth.routes.js";
 import taksRoutes from "./routes/tasks.routes.js";
 import { FRONTEND_URL } from "./config.js";
 
-const app = async () => express();
+const app = express();
 
 app.use(
   cors({
@@ -23,7 +23,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api", taksRoutes);
 
 if (process.env.NODE_ENV === "production") {
-  const path = await import("path");
+  const path = async () => await import("path");
   app.use(express.static("client/dist"));
 
   app.get("*", (req, res) => {
