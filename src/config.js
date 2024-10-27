@@ -3,4 +3,4 @@ export const MONGODB_URI =
   process.env.MONGODB_URI || "mongodb+srv://mongo:amaterasu54321@cluster0.ve7mixd.mongodb.net/";
 export const TOKEN_SECRET = process.env.TOKEN_SECRET || "secret";
 
-export const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
+export const FRONTEND_URL = process.env.FRONTEND_URL || "https://parcial2front-two.vercel.app/";
