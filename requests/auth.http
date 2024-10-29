@@ -1,4 +1,4 @@
-@api = https://parcial2-economia-back.vercel.app
+@api = https://parcial2-economia-back.vercel.app/auth
 
 ### post register
 POST {{api}}/register
